@@ -4,7 +4,7 @@ from pathlib import Path
 def readfileandfolder():
     path = Path('')
     items = list(path.rglob('*'))
-    for i, items in enumerate(items):
+    for i, item in enumerate(items):
         print(f"{i+1} : {items}")
 
 
@@ -57,7 +57,11 @@ def updatefile():
             if choice == 1:
                 new_name = input("enter the new name of the file = ")
                 p_new = Path(new_name)
-                p.rename(p_new)
+                if not p_new.exists():   # check before renaming
+                    p.rename(p_new)
+                    print("File renamed successfully.")
+                else:
+                    print("A file with that name already exists.")
 
             if choice ==2 :
                 with open(p, "w") as file:
@@ -115,12 +119,12 @@ def deletefile():
         p = Path(name)
         if p.exists() and p.is_file():
             p.unlink() # DELETES THE FILE
+            print("FILE DELETED !!!")
         else:
             print("the file does not exists.")
     except Exception as err:
         print(f"exception occured as {err}.")
 
-    
 
 
 print("press 1 for creating a file.")
