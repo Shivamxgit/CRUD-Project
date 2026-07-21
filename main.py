@@ -26,6 +26,23 @@ def createfile():
         print(f"an error occured as {err}")
 
 
+def readfile():
+    try:
+        readfileandfolder()
+        name = input("enter the file name to read: ")
+        p =Path(name)
+        if p.exists():
+            with open(p, "r") as file:
+                content= file.read()
+                print(content)
+        else:
+            print("this file does not exists.")
+
+    except Exception as err:
+        print(f"an error occured as {err}")
+
+
+
 
 
 
@@ -38,3 +55,6 @@ check = int(input("enter your choice: "))
 
 if check == 1:
     createfile()
+
+if check ==2:
+    readfile()
